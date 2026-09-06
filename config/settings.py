@@ -80,7 +80,11 @@ class Settings(BaseSettings):
     brand_handle: str = "@tumarca"
 
     # --- TTS --------------------------------------------------------------
-    tts_provider: str = "edge"  # edge | elevenlabs
+    # gemini = gratis y funciona desde servidores | edge = solo en local
+    # (Microsoft bloquea las IPs de centros de datos) | elevenlabs = de pago
+    tts_provider: str = "gemini"
+    gemini_voice: str = "Kore"  # voz predefinida de Gemini
+    gemini_model_tts: str = "gemini-3.5-flash-preview-tts"  # solo si falla el catalogo
     edge_voice: str = "es-ES-AlvaroNeural"
     edge_rate: str = "+12%"
     elevenlabs_api_key: str = ""
