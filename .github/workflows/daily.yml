@@ -47,6 +47,8 @@ jobs:
 
       - name: Ejecutar pipeline
         env:
+          LLM_PROVIDER: ${{ vars.LLM_PROVIDER }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
           BRAND_NAME: ${{ vars.BRAND_NAME }}
           BRAND_HANDLE: ${{ vars.BRAND_HANDLE }}
