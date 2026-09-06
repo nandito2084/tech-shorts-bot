@@ -93,13 +93,23 @@ def _call_gemini(
             system_instruction=system,
             response_mime_type="application/json",
             response_schema=input_schema,
-            max_output_tokens=max_tokens,
+            # Los modelos Flash gastan parte del presupuesto de salida
+            # "pensando" antes de escribir, y si se agota a mitad del JSON la
+            # respuesta llega cortada. Se desactiva el razonamiento previo y se
+            # da margen de sobra al limite de tokens.
+            thinking_config=types.ThinkingConfig(thinking_budget=0),
+            max_output_tokens=max(max_tokens * 3, 8000),
         ),
     )
 
     if not response.text:
         raise RuntimeError("Gemini devolvio una respuesta vacia.")
-    return json.loads(response.text)
+
+    try:
+        return json.loads(response.text)
+    except json.JSONDecodeError as exc:
+        # Respuesta truncada o malformada: structured_call lo reintenta.
+        raise RuntimeError(f"JSON invalido de Gemini: {exc}") from exc
 
 
 def resolve_model(requested: str) -> str:
@@ -120,7 +130,14 @@ def resolve_model(requested: str) -> str:
     return settings.gemini_model_ranker if es_barato else settings.gemini_model_writer
 
 
-@retry(stop=stop_after_attempt(3), wait=wait_exponential(multiplier=2, min=2, max=20), reraise=True)
+# El nivel gratuito de Gemini devuelve 503 cuando el modelo esta saturado. Es
+# transitorio, pero puede durar minutos, asi que conviene insistir con paciencia
+# en lugar de tumbar la ejecucion entera del dia.
+@retry(
+    stop=stop_after_attempt(6),
+    wait=wait_exponential(multiplier=3, min=5, max=90),
+    reraise=True,
+)
 def structured_call(
     *,
     model: str,
