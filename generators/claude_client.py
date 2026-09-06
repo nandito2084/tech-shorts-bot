@@ -85,21 +85,27 @@ def _call_gemini(
             "en .env o en los Secrets del repo."
         )
 
+    # Los modelos Flash gastan parte del presupuesto de salida "pensando" antes
+    # de escribir, y si se agota a mitad del JSON la respuesta llega cortada. Se
+    # desactiva ese razonamiento previo y se da margen de sobra al limite de
+    # tokens. El ajuste no existe en versiones antiguas del SDK, asi que se
+    # aplica solo si esta disponible.
+    opciones: dict[str, Any] = {
+        "system_instruction": system,
+        "response_mime_type": "application/json",
+        "response_schema": input_schema,
+        "max_output_tokens": max(max_tokens * 3, 8000),
+    }
+    try:
+        opciones["thinking_config"] = types.ThinkingConfig(thinking_budget=0)
+    except Exception:  # noqa: BLE001 - SDK antiguo sin control de razonamiento
+        logger.info("El SDK no admite thinking_budget; se continua sin el.")
+
     client = genai.Client(api_key=settings.gemini_api_key)
     response = client.models.generate_content(
         model=model,
         contents=prompt,
-        config=types.GenerateContentConfig(
-            system_instruction=system,
-            response_mime_type="application/json",
-            response_schema=input_schema,
-            # Los modelos Flash gastan parte del presupuesto de salida
-            # "pensando" antes de escribir, y si se agota a mitad del JSON la
-            # respuesta llega cortada. Se desactiva el razonamiento previo y se
-            # da margen de sobra al limite de tokens.
-            thinking_config=types.ThinkingConfig(thinking_budget=0),
-            max_output_tokens=max(max_tokens * 3, 8000),
-        ),
+        config=types.GenerateContentConfig(**opciones),
     )
 
     if not response.text:
