@@ -73,9 +73,10 @@ class Settings(BaseSettings):
     )
 
     # --- Guion / locucion -------------------------------------------------
-    target_seconds: int = 45
-    words_min: int = 115
-    words_max: int = 145
+    # 30 segundos a ritmo agil son unas 80 palabras.
+    target_seconds: int = 30
+    words_min: int = 70
+    words_max: int = 92
     brand_name: str = "TU MARCA"
     brand_handle: str = "@tumarca"
 
@@ -83,8 +84,20 @@ class Settings(BaseSettings):
     # gemini = gratis y funciona desde servidores | edge = solo en local
     # (Microsoft bloquea las IPs de centros de datos) | elevenlabs = de pago
     tts_provider: str = "gemini"
-    gemini_voice: str = "Kore"  # voz predefinida de Gemini
+    gemini_voice: str = "Puck"  # voz masculina joven y energica
     gemini_model_tts: str = "gemini-3.5-flash-preview-tts"  # solo si falla el catalogo
+    # Las voces de Gemini son multilingues: el acento se orienta con esta
+    # instruccion de estilo, no se selecciona con un codigo de idioma.
+    gemini_tts_style: str = (
+        "Locuta en español de España, acento peninsular neutro, como un creador "
+        "de contenido de tecnología joven y con energía. Ritmo rápido y natural, "
+        "sin pausas largas. Enfatiza las cifras. No leas esta instrucción"
+    )
+    # Aceleracion posterior con ffmpeg: garantiza el ritmo aunque el modelo no
+    # obedezca del todo la instruccion de velocidad. 1.0 la desactiva.
+    tts_speed: float = 1.12
+    # El nivel gratuito limita las peticiones por minuto: se espacian las escenas.
+    tts_pause_seconds: int = 31
     edge_voice: str = "es-ES-AlvaroNeural"
     edge_rate: str = "+12%"
     elevenlabs_api_key: str = ""
