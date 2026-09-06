@@ -1,0 +1,19 @@
+# Núcleo del pipeline
+feedparser==6.0.11
+requests==2.32.3
+anthropic==0.40.0
+pydantic==2.9.2
+pydantic-settings==2.6.1
+python-dotenv==1.0.1
+rapidfuzz==3.10.1
+python-slugify==8.0.4
+tenacity==9.0.0
+
+# Generación de vídeo
+Pillow==11.0.0
+edge-tts==6.1.19
+
+# Publicación
+google-api-python-client==2.151.0
+google-auth==2.36.0
+google-auth-oauthlib==1.2.1

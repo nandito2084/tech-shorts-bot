@@ -1,0 +1,42 @@
+{
+  "landing_url": "https://tuusuario.github.io/enlaces",
+  "rules": [
+    {
+      "keywords": ["rtx", "geforce", "nvidia", "gpu", "grafica", "radeon"],
+      "label": "Tarjetas gráficas",
+      "url": "https://www.amazon.es/s?k=tarjeta+grafica&tag=TU-TAG-21",
+      "program": "amazon"
+    },
+    {
+      "keywords": ["ryzen", "intel", "core ultra", "cpu", "procesador"],
+      "label": "Procesadores",
+      "url": "https://www.pccomponentes.com/procesadores",
+      "program": "pccomponentes"
+    },
+    {
+      "keywords": ["ssd", "nvme", "almacenamiento", "disco"],
+      "label": "SSD NVMe",
+      "url": "https://www.amazon.es/s?k=ssd+nvme&tag=TU-TAG-21",
+      "program": "amazon"
+    },
+    {
+      "keywords": ["ddr5", "memoria", "ram"],
+      "label": "Memoria DDR5",
+      "url": "https://www.pccomponentes.com/memorias-ram",
+      "program": "pccomponentes"
+    },
+    {
+      "keywords": ["iphone", "movil", "smartphone", "snapdragon", "android"],
+      "label": "Móviles",
+      "url": "https://www.amazon.es/s?k=smartphone&tag=TU-TAG-21",
+      "program": "amazon"
+    }
+  ],
+  "fallback": [
+    {
+      "label": "Componentes recomendados",
+      "url": "https://www.amazon.es/shop/TU-TIENDA",
+      "program": "amazon"
+    }
+  ]
+}
