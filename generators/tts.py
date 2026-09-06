@@ -21,6 +21,7 @@ import json
 import logging
 import shutil
 import subprocess
+import time
 import wave
 from functools import lru_cache
 from pathlib import Path
@@ -109,10 +110,14 @@ def _gemini_tts(text: str, out_path: Path) -> None:
     if not settings.gemini_api_key:
         raise RuntimeError("Falta GEMINI_API_KEY para generar la locucion.")
 
+    # El estilo (acento, energia, ritmo) se pide en el propio texto: es el
+    # mecanismo que ofrece Gemini para dirigir la voz.
+    contenido = f"{settings.gemini_tts_style}: {text}" if settings.gemini_tts_style else text
+
     client = genai.Client(api_key=settings.gemini_api_key)
     response = client.models.generate_content(
         model=_gemini_tts_model(),
-        contents=text,
+        contents=contenido,
         config=types.GenerateContentConfig(
             response_modalities=["AUDIO"],
             speech_config=types.SpeechConfig(
@@ -168,6 +173,22 @@ def audio_extension() -> str:
     return ".wav" if get_settings().tts_provider == "gemini" else ".mp3"
 
 
+def _acelerar(path: Path, factor: float) -> None:
+    """Acelera el audio in situ con ffmpeg, conservando el tono de voz."""
+    if abs(factor - 1.0) < 0.01:
+        return
+    temp = path.with_name(f"{path.stem}_rapido{path.suffix}")
+    result = subprocess.run(
+        ["ffmpeg", "-y", "-i", str(path), "-filter:a", f"atempo={factor:.2f}", str(temp)],
+        capture_output=True,
+        text=True,
+    )
+    if result.returncode != 0:
+        logger.warning("No se pudo acelerar el audio: %s", result.stderr[-300:])
+        return
+    temp.replace(path)
+
+
 def synthesize_scene(text: str, out_path: Path) -> float:
     """Genera el audio de una escena y devuelve su duracion en segundos."""
     settings = get_settings()
@@ -182,6 +203,8 @@ def synthesize_scene(text: str, out_path: Path) -> float:
 
     if not out_path.exists() or out_path.stat().st_size == 0:
         raise RuntimeError(f"El TTS no genero audio para: {text[:60]}...")
+
+    _acelerar(out_path, settings.tts_speed)
     return audio_duration(out_path)
 
 
@@ -196,10 +219,15 @@ def synthesize_script(script: ShortScript, work_dir: Path) -> list[tuple[Path, f
     ensure_ffmpeg()
     work_dir.mkdir(parents=True, exist_ok=True)
 
+    settings = get_settings()
     extension = audio_extension()
     blocks = [script.hook] + [scene.narration for scene in script.scenes]
     tracks: list[tuple[Path, float]] = []
     for index, text in enumerate(blocks):
+        # El nivel gratuito limita las peticiones por minuto: esperar entre
+        # escenas alarga la ejecucion, pero evita el error 429.
+        if index > 0 and settings.tts_pause_seconds > 0:
+            time.sleep(settings.tts_pause_seconds)
         path = work_dir / f"voz_{index:02d}{extension}"
         duration = synthesize_scene(text, path)
         logger.info("Escena %d locutada: %.2fs", index, duration)
