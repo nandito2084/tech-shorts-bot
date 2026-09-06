@@ -25,8 +25,13 @@ AFFILIATES_FILE: Path = ROOT_DIR / "config" / "affiliates.json"
 class Settings(BaseSettings):
     """Configuracion validada del pipeline."""
 
+    # protected_namespaces vacio: los campos model_ranker y model_writer chocan
+    # con el espacio reservado "model_" de pydantic y generan avisos.
     model_config = SettingsConfigDict(
-        env_file=".env", env_file_encoding="utf-8", extra="ignore"
+        env_file=".env",
+        env_file_encoding="utf-8",
+        extra="ignore",
+        protected_namespaces=(),
     )
 
     # --- Proveedor de modelos ---------------------------------------------
@@ -41,10 +46,11 @@ class Settings(BaseSettings):
 
     # --- API de Gemini ----------------------------------------------------
     gemini_api_key: str = Field(default="", description="Clave de Google AI Studio")
-    # El nivel gratuito cubre solo la familia Flash. Los nombres de modelo
-    # cambian con el tiempo: si uno deja de existir, se cambia aqui.
-    gemini_model_ranker: str = "gemini-2.5-flash-lite"
-    gemini_model_writer: str = "gemini-2.5-flash"
+    # Google retira modelos con frecuencia. Si el pipeline falla con un 404 de
+    # modelo, el propio mensaje de error indica cual es el sustituto: se cambia
+    # aqui o con las variables GEMINI_MODEL_RANKER / GEMINI_MODEL_WRITER.
+    gemini_model_ranker: str = "gemini-3.5-flash-lite"
+    gemini_model_writer: str = "gemini-3.6-flash"
 
     # --- Fuentes RSS ------------------------------------------------------
     feeds: list[str] = [
