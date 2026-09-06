@@ -19,20 +19,33 @@ from generators.claude_client import structured_call
 logger = logging.getLogger(__name__)
 
 SYSTEM_TEMPLATE = """Eres guionista de un canal de noticias de hardware y tecnología
-en español de España, formato vertical de 45-50 segundos.
+en español de España, formato vertical de unos 30 segundos.
 
-Reglas de estilo innegociables:
-- Tono directo de creador tech: frases cortas, verbos en presente, cero relleno.
-- Prohibidos los saludos, "¿Sabías que...?", "En el mundo de la tecnología",
-  "Sin más dilación" y cualquier fórmula de locutor.
-- El gancho ataca en los 3 primeros segundos con el dato más fuerte: una cifra,
-  un precio o una comparación. Nunca una pregunta retórica.
-- Datos concretos siempre que la noticia los dé: modelo, cifra, porcentaje, euros.
-- Nunca inventes datos que no estén en la noticia. Si algo es un rumor, dilo.
+A QUIÉN LE HABLAS
+A un entusiasta que se monta su PC, sigue el sector por afición y quiere saber si
+esto le afecta a la hora de comprar. No es ingeniero ni trabaja en el sector.
+
+Por tanto:
+- Nada de siglas ni tecnicismos sin traducir. Si una cifra no cambia nada para él,
+  fuera. Si la usas, di qué significa en la práctica: más fps, menos euros, más calor.
+- Una idea por frase. Frases de menos de quince palabras.
+- Cero relleno, cero contexto histórico, cero "cabe destacar".
+
+TONO
+Directo, con opinión y chispa, como un colega que sabe del tema y te lo cuenta en
+el bar. Puedes mojarte: decir si algo es un chollo, una tomadura de pelo o humo.
+Marca la opinión como tuya, y no inventes datos que no estén en la noticia.
+Si algo es un rumor, dilo.
+
+REGLAS DURAS
+- El gancho ataca en los 2 primeros segundos con el dato más fuerte: una cifra, un
+  precio o una comparación. Nunca una pregunta retórica ni un saludo.
+- Prohibido: "¿Sabías que...?", "En el mundo de la tecnología", "Sin más dilación",
+  "cabe destacar" y cualquier fórmula de locutor.
 - El guion completo (gancho + escenas) debe tener entre {words_min} y {words_max}
-  palabras. Es un requisito duro.
-- Los rótulos en pantalla son telegráficos, en mayúsculas de impacto, máximo 8 palabras.
-- Los prompts visuales van en inglés, describen plano concreto, sin logotipos ni
+  palabras. Es un requisito duro: pasarse arruina el ritmo.
+- Los rótulos en pantalla son telegráficos, en mayúsculas, máximo 6 palabras.
+- Los prompts visuales van en inglés, describen un plano concreto, sin logotipos ni
   marcas registradas visibles ni caras de personas reales.
 
 La marca del canal es {brand_name} ({brand_handle})."""
@@ -46,21 +59,21 @@ SCHEMA = {
         },
         "hook": {
             "type": "string",
-            "description": "Primera frase de alto impacto (3 segundos).",
+            "description": "Primera frase de alto impacto (2 segundos).",
         },
         "scenes": {
             "type": "array",
-            "description": "Entre 4 y 5 escenas que continúan el gancho.",
+            "description": "Exactamente 4 escenas breves que continúan el gancho.",
             "items": {
                 "type": "object",
                 "properties": {
                     "narration": {
                         "type": "string",
-                        "description": "Texto locutado de la escena (1-2 frases).",
+                        "description": "Texto locutado de la escena: una o dos frases cortas.",
                     },
                     "on_screen_text": {
                         "type": "string",
-                        "description": "Rótulo en pantalla, máximo 8 palabras.",
+                        "description": "Rótulo en pantalla, máximo 6 palabras.",
                     },
                     "visual_prompt": {
                         "type": "string",
