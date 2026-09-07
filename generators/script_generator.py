@@ -2,13 +2,14 @@
 
 El esquema está escrito a mano (sin ``$defs``) para máxima compatibilidad con
 la API. Tras recibir la respuesta se validan las reglas de negocio (longitud de
-título, número de palabras del guion). Si fallan, se reintenta una vez
-indicándole al modelo exactamente qué corregir.
+título, número de palabras del guion, cifra en el gancho). Si fallan, se
+reintenta una vez indicándole al modelo exactamente qué corregir.
 """
 
 from __future__ import annotations
 
 import logging
+import re
 
 from pydantic import ValidationError
 
@@ -37,9 +38,24 @@ el bar. Puedes mojarte: decir si algo es un chollo, una tomadura de pelo o humo.
 Marca la opinión como tuya, y no inventes datos que no estén en la noticia.
 Si algo es un rumor, dilo.
 
+EL GANCHO: FÓRMULA OBLIGATORIA
+Todos los vídeos abren igual en estructura, nunca en palabras. Dos frases secas:
+
+  1) El dato más fuerte de la noticia, a poder ser empezando por la cifra.
+  2) La consecuencia directa, en presente y en menos de ocho palabras.
+
+Ejemplos del tono exacto que se busca:
+  "613 vatios. Y la tarjeta se derritió."
+  "1.200 euros. Ese es el nuevo precio de la gama media."
+  "Un 40% más rápida. Y cuesta lo mismo que la anterior."
+
+Si la noticia trae cifras, el gancho DEBE llevar al menos una. Si no las trae,
+usa una comparación tajante, pero mantén las dos frases.
+
+Prohibido en el gancho: preguntas retóricas, saludos, "¿Sabías que...?",
+"Atención" y cualquier rodeo antes del dato.
+
 REGLAS DURAS
-- El gancho ataca en los 2 primeros segundos con el dato más fuerte: una cifra, un
-  precio o una comparación. Nunca una pregunta retórica ni un saludo.
 - Prohibido: "¿Sabías que...?", "En el mundo de la tecnología", "Sin más dilación",
   "cabe destacar" y cualquier fórmula de locutor.
 - El guion completo (gancho + escenas) debe tener entre {words_min} y {words_max}
@@ -59,7 +75,10 @@ SCHEMA = {
         },
         "hook": {
             "type": "string",
-            "description": "Primera frase de alto impacto (2 segundos).",
+            "description": (
+                "Dos frases: cifra o dato fuerte, y consecuencia directa. "
+                "Ejemplo: '613 vatios. Y la tarjeta se derritió.'"
+            ),
         },
         "scenes": {
             "type": "array",
@@ -145,9 +164,24 @@ def _build_prompt(news: NewsItem, correction: str = "") -> str:
     return base
 
 
-def _validate(script: ShortScript, words_min: int, words_max: int) -> str:
-    """Devuelve el texto de corrección necesario, o cadena vacía si todo va bien."""
+def _validate(
+    script: ShortScript, words_min: int, words_max: int, news_text: str = ""
+) -> str:
+    """Devuelve el texto de corrección necesario, o cadena vacía si todo va bien.
+
+    Args:
+        script: guion a validar.
+        words_min: mínimo de palabras del guion completo.
+        words_max: máximo de palabras del guion completo.
+        news_text: titular y resumen, para exigir cifra en el gancho solo
+            cuando la noticia realmente aporta alguna.
+    """
     problems: list[str] = []
+    if re.search(r"\d", news_text) and not re.search(r"\d", script.hook):
+        problems.append(
+            "el gancho no usa ninguna cifra y la noticia sí las trae: "
+            "empieza por el dato numérico más fuerte"
+        )
     if len(script.title) > 55:
         problems.append(f"el título tiene {len(script.title)} caracteres, máximo 55")
     if not words_min <= script.word_count <= words_max:
@@ -200,7 +234,10 @@ def generate_script(news: NewsItem) -> ShortScript:
             logger.warning("Intento %d inválido: %s", attempt, last_error[:200])
             continue
 
-        correction = _validate(script, settings.words_min, settings.words_max)
+        correction = _validate(
+            script, settings.words_min, settings.words_max,
+            f"{news.title} {news.summary}",
+        )
         if not correction:
             logger.info("Guion generado (%d palabras): %s", script.word_count, script.title)
             return script
