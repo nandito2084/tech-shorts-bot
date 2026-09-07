@@ -54,6 +54,10 @@ jobs:
           BRAND_NAME: ${{ vars.BRAND_NAME }}
           BRAND_HANDLE: ${{ vars.BRAND_HANDLE }}
           TTS_PROVIDER: ${{ vars.TTS_PROVIDER }}
+          # Voz y ritmo: se cambian desde las Variables del repositorio, sin
+          # tocar codigo. Voces graves a probar: Charon, Orus, Algenib, Gacrux.
+          GEMINI_VOICE: ${{ vars.GEMINI_VOICE }}
+          TTS_SPEED: ${{ vars.TTS_SPEED }}
           ELEVENLABS_API_KEY: ${{ secrets.ELEVENLABS_API_KEY }}
           ELEVENLABS_VOICE_ID: ${{ secrets.ELEVENLABS_VOICE_ID }}
           PUBLISH_YOUTUBE: ${{ vars.PUBLISH_YOUTUBE }}
