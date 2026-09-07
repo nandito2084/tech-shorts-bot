@@ -10,7 +10,7 @@ from pydantic import BaseModel, Field, field_validator
 class NewsItem(BaseModel):
     """Noticia normalizada procedente de un feed RSS."""
 
-    id: str = Field(description="Hash estable del enlace canónico")
+    id: str = Field(description="Hash estable del enlace canonico")
     title: str
     link: str
     summary: str = ""
@@ -25,11 +25,11 @@ class NewsItem(BaseModel):
 
 
 class Scene(BaseModel):
-    """Una escena del Short: narración + texto en pantalla + prompt visual."""
+    """Una escena del Short: narracion, texto en pantalla y prompt visual."""
 
     narration: str = Field(description="Lo que se locuta en esta escena")
-    on_screen_text: str = Field(description="Rótulo corto en pantalla (máx. 8 palabras)")
-    visual_prompt: str = Field(description="Descripción visual en inglés")
+    on_screen_text: str = Field(description="Rotulo corto en pantalla")
+    visual_prompt: str = Field(description="Descripcion visual en ingles")
 
     @field_validator("on_screen_text")
     @classmethod
@@ -49,13 +49,19 @@ class ShortScript(BaseModel):
     youtube_pinned_comment: str
     instagram_caption: str
     hashtags: list[str] = Field(min_length=10, max_length=15)
+    # Dos cifras comparables de la noticia, para el contador animado. Opcional:
+    # solo se rellena cuando la noticia da un antes y un despues reales.
+    counter: dict | None = Field(
+        default=None,
+        description="Ejemplo: {'from': 450, 'to': 613, 'unit': 'W'}",
+    )
     keyword: str = Field(description="Palabra clave del CTA de Instagram (ej. GPU)")
 
     # --- Derivados usados por el resto del pipeline -----------------------
 
     @property
     def script_body(self) -> str:
-        """Guion completo de locución (gancho incluido)."""
+        """Guion completo de locucion (gancho incluido)."""
         return " ".join([self.hook, *(s.narration for s in self.scenes)])
 
     @property
@@ -65,12 +71,12 @@ class ShortScript(BaseModel):
 
     @property
     def word_count(self) -> int:
-        """Número de palabras del guion completo."""
+        """Numero de palabras del guion completo."""
         return len(self.script_body.split())
 
 
 class Package(BaseModel):
-    """Paquete final: noticia + guion + rutas de los archivos generados."""
+    """Paquete final: noticia, guion y rutas de los archivos generados."""
 
     news: NewsItem
     script: ShortScript
