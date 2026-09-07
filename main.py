@@ -5,8 +5,8 @@ Uso:
     python main.py --run                # pipeline completo
     python main.py --run --limit 1      # una sola noticia
     python main.py --run --no-video     # solo guion y metadatos
-    python main.py --run --dry-run      # sin publicar (aunque esté activado)
-    python main.py --run --force        # ignora la caché de noticias vistas
+    python main.py --run --dry-run      # sin publicar (aunque este activado)
+    python main.py --run --force        # ignora la cache de noticias vistas
 """
 
 from __future__ import annotations
@@ -37,13 +37,13 @@ logger = logging.getLogger("pipeline")
 
 
 def cmd_check(limit: int, force: bool) -> int:
-    """Muestra las noticias nuevas detectadas sin gastar API de generación."""
+    """Muestra las noticias nuevas detectadas sin gastar API de generacion."""
     candidates = fetch_candidates(force=force)
     if not candidates:
         print("\nNo hay noticias nuevas en la ventana configurada.\n")
         return 0
 
-    print(f"\n{len(candidates)} noticias nuevas (top {limit} irían a producción):\n")
+    print(f"\n{len(candidates)} noticias nuevas (top {limit} irian a produccion):\n")
     for index, item in enumerate(candidates, start=1):
         marker = "->" if index <= limit else "  "
         print(f"{marker} [{item.score:5.1f}] {item.title}")
@@ -52,14 +52,21 @@ def cmd_check(limit: int, force: bool) -> int:
 
 
 def _produce_media(package: Package, work_root: Path) -> Package:
-    """Genera locución y vídeo para un paquete ya exportado."""
+    """Genera locucion y video para un paquete ya exportado."""
     from generators.tts import synthesize_script
     from generators.video_builder import build_video
 
     work_dir = work_root / package.slug
     tracks = synthesize_script(package.script, work_dir)
     video_path = OUTPUT_DIR / package.slug / f"{package.slug}.mp4"
-    build_video(package.script, tracks, package.news.source, work_dir, video_path)
+    build_video(
+        package.script,
+        tracks,
+        package.news.source,
+        work_dir,
+        video_path,
+        news_text=f"{package.news.title} {package.news.summary}",
+    )
 
     package.audio_path = str(work_dir)
     package.video_path = str(video_path)
@@ -67,7 +74,7 @@ def _produce_media(package: Package, work_root: Path) -> Package:
 
 
 def _publish(package: Package) -> Package:
-    """Publica en las plataformas activadas por configuración."""
+    """Publica en las plataformas activadas por configuracion."""
     settings = get_settings()
     payload = json.loads(Path(package.json_path).read_text(encoding="utf-8"))
 
@@ -76,7 +83,7 @@ def _publish(package: Package) -> Package:
             from publisher.youtube import upload_short
 
             package.youtube_url = upload_short(package, payload["comentario_fijado"])
-        except Exception as exc:  # noqa: BLE001 - un fallo no debe perder el vídeo
+        except Exception as exc:  # noqa: BLE001 - un fallo no debe perder el video
             logger.error("Fallo publicando en YouTube: %s", exc)
 
     if settings.publish_instagram:
@@ -134,7 +141,7 @@ def cmd_run(limit: int, force: bool, make_video: bool, dry_run: bool) -> int:
         print(f"\n  {package.script.title}")
         print(f"    texto : {package.txt_path}")
         if package.video_path:
-            print(f"    vídeo : {package.video_path}")
+            print(f"    video : {package.video_path}")
         if package.youtube_url:
             print(f"    youtube: {package.youtube_url}")
         if package.instagram_id:
@@ -144,7 +151,7 @@ def cmd_run(limit: int, force: bool, make_video: bool, dry_run: bool) -> int:
 
 
 def build_parser() -> argparse.ArgumentParser:
-    """Define la interfaz de línea de comandos."""
+    """Define la interfaz de linea de comandos."""
     parser = argparse.ArgumentParser(
         description="Pipeline de Shorts/Reels de noticias de hardware."
     )
@@ -152,9 +159,9 @@ def build_parser() -> argparse.ArgumentParser:
     group.add_argument("--check", action="store_true", help="Solo listar noticias nuevas")
     group.add_argument("--run", action="store_true", help="Ejecutar pipeline completo")
     parser.add_argument("--limit", type=int, default=None, help="Noticias a procesar")
-    parser.add_argument("--force", action="store_true", help="Ignorar la caché")
+    parser.add_argument("--force", action="store_true", help="Ignorar la cache")
     parser.add_argument(
-        "--no-video", action="store_true", help="Solo guion y metadatos, sin montar vídeo"
+        "--no-video", action="store_true", help="Solo guion y metadatos, sin montar video"
     )
     parser.add_argument(
         "--dry-run", action="store_true", help="Generar todo pero no publicar"
