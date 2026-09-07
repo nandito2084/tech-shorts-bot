@@ -108,6 +108,20 @@ SCHEMA = {
             "type": "string",
             "description": "Palabra clave en mayúsculas del CTA de Instagram.",
         },
+        "counter": {
+            "type": "object",
+            "description": (
+                "SOLO si la noticia da dos cifras comparables de la misma "
+                "magnitud (por ejemplo 450 W antes y 613 W después). Si no las "
+                "da, omite este campo por completo. No inventes cifras."
+            ),
+            "properties": {
+                "from": {"type": "integer", "description": "Cifra inicial."},
+                "to": {"type": "integer", "description": "Cifra final."},
+                "unit": {"type": "string", "description": "Unidad corta: W, €, %, fps."},
+            },
+            "required": ["from", "to", "unit"],
+        },
     },
     "required": [
         "title", "hook", "scenes", "cta_youtube", "cta_instagram",
