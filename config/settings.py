@@ -9,7 +9,7 @@ from __future__ import annotations
 from functools import lru_cache
 from pathlib import Path
 
-from pydantic import Field
+from pydantic import Field, model_validator
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 ROOT_DIR: Path = Path(__file__).resolve().parent.parent
@@ -24,6 +24,23 @@ AFFILIATES_FILE: Path = ROOT_DIR / "config" / "affiliates.json"
 
 class Settings(BaseSettings):
     """Configuracion validada del pipeline."""
+
+    @model_validator(mode="before")
+    @classmethod
+    def _ignorar_vacios(cls, datos: object) -> object:
+        """Descarta las variables vacias para que gane el valor por defecto.
+
+        En GitHub Actions, una variable que no existe se inyecta como cadena
+        vacia. Sin esto, un TTS_SPEED sin crear tumba el arranque entero porque
+        pydantic no puede convertir "" en numero.
+        """
+        if isinstance(datos, dict):
+            return {
+                clave: valor
+                for clave, valor in datos.items()
+                if not (isinstance(valor, str) and valor.strip() == "")
+            }
+        return datos
 
     # protected_namespaces vacio: los campos model_ranker y model_writer chocan
     # con el espacio reservado "model_" de pydantic y generan avisos.
