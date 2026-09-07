@@ -52,6 +52,11 @@ class Settings(BaseSettings):
     gemini_model_ranker: str = "gemini-3.5-flash-lite"
     gemini_model_writer: str = "gemini-3.6-flash"
 
+    # --- B-roll (Pexels) ---------------------------------------------------
+    # Clave gratuita de pexels.com/api. Sin ella, el video se genera igual pero
+    # con el fondo procedural en lugar de imagenes de apoyo.
+    pexels_api_key: str = Field(default="", description="Clave de la API de Pexels")
+
     # --- Fuentes RSS ------------------------------------------------------
     feeds: list[str] = [
         "https://elchapuzasinformatico.com/feed/",
