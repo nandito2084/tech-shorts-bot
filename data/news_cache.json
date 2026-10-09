@@ -1,53 +1,4 @@
 {
-  "10f8b1f8c6777348": {
-    "title": "Consiguen hacer funcionar el NVIDIA DLSS 5 en las GPU AMD Radeon",
-    "title_norm": "consiguen hacer funcionar el nvidia dlss 5 en las gpu amd radeon",
-    "link": "https://elchapuzasinformatico.com/2026/09/nvidia-dlss-5-gpu-amd-radeon/",
-    "source": "El Chapuzas Informático",
-    "seen_at": "2026-09-06T22:14:41.369947+00:00"
-  },
-  "7d620298d3b8b7fe": {
-    "title": "DLSS 5 Testing Ends in a Melted RTX 5090 Connector, Power Shoots Past 600 W",
-    "title_norm": "dlss 5 testing ends in a melted rtx 5090 connector  power shoots past 600 w",
-    "link": "https://www.techpowerup.com/352412/dlss-5-testing-ends-in-a-melted-rtx-5090-connector-power-shoots-past-600-w",
-    "source": "TechPowerUp",
-    "seen_at": "2026-09-06T22:35:24.219303+00:00"
-  },
-  "35b0c813fd7f4075": {
-    "title": "NVIDIA Offers GeForce RTX 50-Series Founders Edition GPUs at MSRP at PAX West",
-    "title_norm": "nvidia offers geforce rtx 50 series founders edition gpus at msrp at pax west",
-    "link": "https://www.techpowerup.com/352387/nvidia-offers-geforce-rtx-50-series-founders-edition-gpus-at-msrp-at-pax-west",
-    "source": "TechPowerUp",
-    "seen_at": "2026-09-07T09:01:31.576004+00:00"
-  },
-  "d038e5064ee4bae1": {
-    "title": "Mod Revives Multi-GPU Gaming With Dedicated DLSS 5 GPU for Impressive FPS Gain",
-    "title_norm": "mod revives multi gpu gaming with dedicated dlss 5 gpu for impressive fps gain",
-    "link": "https://www.techpowerup.com/352459/mod-revives-multi-gpu-gaming-with-dedicated-dlss-5-gpu-for-impressive-fps-gain",
-    "source": "TechPowerUp",
-    "seen_at": "2026-09-08T12:13:41.386625+00:00"
-  },
-  "49e14fd5744712f9": {
-    "title": "Japanese Retailer Predicts Further GPU Price Hikes",
-    "title_norm": "japanese retailer predicts further gpu price hikes",
-    "link": "https://www.techpowerup.com/352456/japanese-retailer-predicts-further-gpu-price-hikes",
-    "source": "TechPowerUp",
-    "seen_at": "2026-09-08T12:16:59.870254+00:00"
-  },
-  "67bf79a9e7173a00": {
-    "title": "Fragile 16-Pin Connectors Keep Melting RTX 5090s & Other GPUs, But Teclab Proves Old 8-Pin Connectors Can Handle The Load Just Fine",
-    "title_norm": "fragile 16 pin connectors keep melting rtx 5090s   other gpus  but teclab proves old 8 pin connectors can handle the load just fine",
-    "link": "https://wccftech.com/fragile-16-pin-connectors-keep-melting-rtx-5090s-gpus-teclab-proves-old-8-pin-connectors-can-handle-the-load-just-fine/",
-    "source": "Wccftech",
-    "seen_at": "2026-09-09T12:23:42.331741+00:00"
-  },
-  "1cc135d7d06359ed": {
-    "title": "Lenovo Asked For More Than $800 For A Laptop Repair Job Where The Notebook Display Wasn’t Working, But The Fix Only Involved A Small Piece Of Copper Wire",
-    "title_norm": "lenovo asked for more than  800 for a laptop repair job where the notebook display wasn t working  but the fix only involved a small piece of copper wire",
-    "link": "https://wccftech.com/lenovo-quotes-800-laptop-repair-fixed-with-copper-wire/",
-    "source": "Wccftech",
-    "seen_at": "2026-09-09T12:27:33.608849+00:00"
-  },
   "eace18df055c0327": {
     "title": "Modders Unlock DLSS Multi Frame Generation For RTX 30-Series \"Ampere\" GPUs",
     "title_norm": "modders unlock dlss multi frame generation for rtx 30 series  ampere  gpus",
@@ -110,5 +61,12 @@
     "link": "https://www.techpowerup.com/352841/developer-ports-dlss-5-to-intel-integrated-graphics-with-help-from-ai-agents",
     "source": "TechPowerUp",
     "seen_at": "2026-09-19T12:02:21.787140+00:00"
+  },
+  "2a5727c63409e465": {
+    "title": "AMD GPUs Get Price Hike in China with International Increases To Follow",
+    "title_norm": "amd gpus get price hike in china with international increases to follow",
+    "link": "https://www.techpowerup.com/353520/amd-gpus-get-price-hike-in-china-with-international-increases-to-follow",
+    "source": "TechPowerUp",
+    "seen_at": "2026-10-09T14:29:00.467980+00:00"
   }
 }
