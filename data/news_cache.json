@@ -1,18 +1,4 @@
 {
-  "5c8209c94ebed419": {
-    "title": "DLSS Multi Frame Generation Has Now Been Modded Onto RTX 40, RTX 30 & Even RTX 20 GPUs",
-    "title_norm": "dlss multi frame generation has now been modded onto rtx 40  rtx 30   even rtx 20 gpus",
-    "link": "https://wccftech.com/dlss-multi-frame-generation-has-now-been-modded-onto-rtx-40-rtx-30-even-rtx-20-gpus/",
-    "source": "Wccftech",
-    "seen_at": "2026-09-12T11:43:16.691634+00:00"
-  },
-  "ff2a5083f099a8ba": {
-    "title": "NVIDIA RTX 5090 Shoots Past €5,000 in Germany, Prices Jump 73% Since January",
-    "title_norm": "nvidia rtx 5090 shoots past  5 000 in germany  prices jump 73  since january",
-    "link": "https://www.techpowerup.com/352598/nvidia-rtx-5090-shoots-past-eur-5-000-in-germany-prices-jump-73-since-january",
-    "source": "TechPowerUp",
-    "seen_at": "2026-09-12T11:49:40.656229+00:00"
-  },
   "57c03a90c2589e58": {
     "title": "Las GPU están por las nubes: esta web ha cartografiado la subida de las RTX 50 y RX 9000 en 2026 y es demencial",
     "title_norm": "las gpu estan por las nubes  esta web ha cartografiado la subida de las rtx 50 y rx 9000 en 2026 y es demencial",
@@ -54,5 +40,12 @@
     "link": "https://elchapuzasinformatico.com/2026/10/nvidia-deja-de-fabricar-geforce-rtx-5090-rtx-5080-24-gb/",
     "source": "El Chapuzas Informático",
     "seen_at": "2026-10-11T14:10:55.841800+00:00"
+  },
+  "2b185e3ee5c15c7f": {
+    "title": "La CPU, RAM y SSD ya supone el 68% del coste de un portátil de 900 euros",
+    "title_norm": "la cpu  ram y ssd ya supone el 68  del coste de un portatil de 900 euros",
+    "link": "https://elchapuzasinformatico.com/2026/10/cpu-ram-ssd-68-por-ciento-del-coste-portatil/",
+    "source": "El Chapuzas Informático",
+    "seen_at": "2026-10-12T16:48:40.998166+00:00"
   }
 }
