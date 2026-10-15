@@ -1,18 +1,4 @@
 {
-  "57c03a90c2589e58": {
-    "title": "Las GPU están por las nubes: esta web ha cartografiado la subida de las RTX 50 y RX 9000 en 2026 y es demencial",
-    "title_norm": "las gpu estan por las nubes  esta web ha cartografiado la subida de las rtx 50 y rx 9000 en 2026 y es demencial",
-    "link": "https://www.xataka.com/componentes/gpu-estan-nubes-esta-web-ha-cartografiado-subida-rtx-50-rx-9000-2026-demencial",
-    "source": "Xataka",
-    "seen_at": "2026-09-13T12:47:01.846206+00:00"
-  },
-  "04672aa3ab8822cd": {
-    "title": "Modified GeForce RTX 5090 with 96 GB Memory Shows Up on Alibaba for Nearly $4,000",
-    "title_norm": "modified geforce rtx 5090 with 96 gb memory shows up on alibaba for nearly  4 000",
-    "link": "https://www.techpowerup.com/352610/modified-geforce-rtx-5090-with-96-gb-memory-shows-up-on-alibaba-for-nearly-usd-4-000",
-    "source": "TechPowerUp",
-    "seen_at": "2026-09-13T12:50:26.097767+00:00"
-  },
   "74d7feeedd183227": {
     "title": "Developer Ports DLSS 5 to Intel Integrated Graphics With Help From AI Agents",
     "title_norm": "developer ports dlss 5 to intel integrated graphics with help from ai agents",
@@ -47,5 +33,12 @@
     "link": "https://elchapuzasinformatico.com/2026/10/cpu-ram-ssd-68-por-ciento-del-coste-portatil/",
     "source": "El Chapuzas Informático",
     "seen_at": "2026-10-12T16:48:40.998166+00:00"
+  },
+  "038f06f3f04f25b8": {
+    "title": "User Says He “Begged” For One RTX 5090 As Micro Center Pulled All RTX 5090s From Shelves; Lists The GPU As “Not Carried”",
+    "title_norm": "user says he  begged  for one rtx 5090 as micro center pulled all rtx 5090s from shelves  lists the gpu as  not carried",
+    "link": "https://wccftech.com/micro-center-pulls-rtx-5090-from-shelves/",
+    "source": "Wccftech",
+    "seen_at": "2026-10-15T12:46:07.507129+00:00"
   }
 }
