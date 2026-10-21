@@ -1,11 +1,4 @@
 {
-  "74d7feeedd183227": {
-    "title": "Developer Ports DLSS 5 to Intel Integrated Graphics With Help From AI Agents",
-    "title_norm": "developer ports dlss 5 to intel integrated graphics with help from ai agents",
-    "link": "https://www.techpowerup.com/352841/developer-ports-dlss-5-to-intel-integrated-graphics-with-help-from-ai-agents",
-    "source": "TechPowerUp",
-    "seen_at": "2026-09-19T12:02:21.787140+00:00"
-  },
   "2a5727c63409e465": {
     "title": "AMD GPUs Get Price Hike in China with International Increases To Follow",
     "title_norm": "amd gpus get price hike in china with international increases to follow",
@@ -40,5 +33,12 @@
     "link": "https://wccftech.com/micro-center-pulls-rtx-5090-from-shelves/",
     "source": "Wccftech",
     "seen_at": "2026-10-15T12:46:07.507129+00:00"
+  },
+  "7a301e07d00ac075": {
+    "title": "Rumored Steam Deck 2 APU Appears in Leaked Benchmarks with 50% More CPU Cores",
+    "title_norm": "rumored steam deck 2 apu appears in leaked benchmarks with 50  more cpu cores",
+    "link": "https://www.techpowerup.com/353888/rumored-steam-deck-2-apu-appears-in-leaked-benchmarks-with-50-more-cpu-cores",
+    "source": "TechPowerUp",
+    "seen_at": "2026-10-21T13:01:12.260711+00:00"
   }
 }
