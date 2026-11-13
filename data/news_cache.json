@@ -1,32 +1,4 @@
 {
-  "2a5727c63409e465": {
-    "title": "AMD GPUs Get Price Hike in China with International Increases To Follow",
-    "title_norm": "amd gpus get price hike in china with international increases to follow",
-    "link": "https://www.techpowerup.com/353520/amd-gpus-get-price-hike-in-china-with-international-increases-to-follow",
-    "source": "TechPowerUp",
-    "seen_at": "2026-10-09T14:29:00.467980+00:00"
-  },
-  "89abb3c4fdbb9f3d": {
-    "title": "NVIDIA Reportedly Ending the RTX 5090, Reserves GB202 Silicon for Workstation GPUs",
-    "title_norm": "nvidia reportedly ending the rtx 5090  reserves gb202 silicon for workstation gpus",
-    "link": "https://www.techpowerup.com/353578/nvidia-reportedly-ending-the-rtx-5090-reserves-gb202-silicon-for-workstation-gpus",
-    "source": "TechPowerUp",
-    "seen_at": "2026-10-11T14:06:34.405124+00:00"
-  },
-  "75edafc7cf7f4854": {
-    "title": "NVIDIA habría dejado de fabricar su GeForce RTX 5090; se reemplazaría por una RTX 5080 24 GB",
-    "title_norm": "nvidia habria dejado de fabricar su geforce rtx 5090  se reemplazaria por una rtx 5080 24 gb",
-    "link": "https://elchapuzasinformatico.com/2026/10/nvidia-deja-de-fabricar-geforce-rtx-5090-rtx-5080-24-gb/",
-    "source": "El Chapuzas Informático",
-    "seen_at": "2026-10-11T14:10:55.841800+00:00"
-  },
-  "2b185e3ee5c15c7f": {
-    "title": "La CPU, RAM y SSD ya supone el 68% del coste de un portátil de 900 euros",
-    "title_norm": "la cpu  ram y ssd ya supone el 68  del coste de un portatil de 900 euros",
-    "link": "https://elchapuzasinformatico.com/2026/10/cpu-ram-ssd-68-por-ciento-del-coste-portatil/",
-    "source": "El Chapuzas Informático",
-    "seen_at": "2026-10-12T16:48:40.998166+00:00"
-  },
   "038f06f3f04f25b8": {
     "title": "User Says He “Begged” For One RTX 5090 As Micro Center Pulled All RTX 5090s From Shelves; Lists The GPU As “Not Carried”",
     "title_norm": "user says he  begged  for one rtx 5090 as micro center pulled all rtx 5090s from shelves  lists the gpu as  not carried",
@@ -89,5 +61,19 @@
     "link": "https://wccftech.com/amd-ryzen-7-9800x3d-drops-to-399-at-newegg/",
     "source": "Wccftech",
     "seen_at": "2026-11-08T14:21:53.193931+00:00"
+  },
+  "bdf0f12f5d0a277d": {
+    "title": "MSI Reportedly Plans RTX 5080 Price Hikes of up to $1,200 in China",
+    "title_norm": "msi reportedly plans rtx 5080 price hikes of up to  1 200 in china",
+    "link": "https://www.techpowerup.com/354703/msi-reportedly-plans-rtx-5080-price-hikes-of-up-to-usd-1-200-in-china",
+    "source": "TechPowerUp",
+    "seen_at": "2026-11-13T15:31:24.415028+00:00"
+  },
+  "a9bdd83c5091e682": {
+    "title": "Red Dead Redemption 2’s Modded Ray Tracing Cuts RTX 5080 Performance From 110 FPS to 50 FPS at 4K With NVIDIA DLSS",
+    "title_norm": "red dead redemption 2 s modded ray tracing cuts rtx 5080 performance from 110 fps to 50 fps at 4k with nvidia dlss",
+    "link": "https://wccftech.com/red-dead-redemption-2-ray-tracing-cuts-rtx-5080-performance-4k/",
+    "source": "Wccftech",
+    "seen_at": "2026-11-13T15:34:32.637794+00:00"
   }
 }
