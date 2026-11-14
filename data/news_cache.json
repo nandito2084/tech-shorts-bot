@@ -1,11 +1,4 @@
 {
-  "038f06f3f04f25b8": {
-    "title": "User Says He “Begged” For One RTX 5090 As Micro Center Pulled All RTX 5090s From Shelves; Lists The GPU As “Not Carried”",
-    "title_norm": "user says he  begged  for one rtx 5090 as micro center pulled all rtx 5090s from shelves  lists the gpu as  not carried",
-    "link": "https://wccftech.com/micro-center-pulls-rtx-5090-from-shelves/",
-    "source": "Wccftech",
-    "seen_at": "2026-10-15T12:46:07.507129+00:00"
-  },
   "7a301e07d00ac075": {
     "title": "Rumored Steam Deck 2 APU Appears in Leaked Benchmarks with 50% More CPU Cores",
     "title_norm": "rumored steam deck 2 apu appears in leaked benchmarks with 50  more cpu cores",
@@ -75,5 +68,12 @@
     "link": "https://wccftech.com/red-dead-redemption-2-ray-tracing-cuts-rtx-5080-performance-4k/",
     "source": "Wccftech",
     "seen_at": "2026-11-13T15:34:32.637794+00:00"
+  },
+  "7e044e56c2683248": {
+    "title": "GeForce RTX 5090 And RTX 5080 Witness A Sudden Price Drop Of Up To 22% In Japan, But It’s Unlikely Due To Jensen’s Resignation",
+    "title_norm": "geforce rtx 5090 and rtx 5080 witness a sudden price drop of up to 22  in japan  but it s unlikely due to jensen s resignation",
+    "link": "https://wccftech.com/geforce-rtx-5090-and-rtx-5080-witness-a-sudden-price-drop-of-up-to-22-in-japan-but-its-unlikely-due-to-jensens-resignation/",
+    "source": "Wccftech",
+    "seen_at": "2026-11-14T14:12:56.800805+00:00"
   }
 }
